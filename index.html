@@ -413,7 +413,8 @@ function startWebGazer() {
     })
     .begin()
     .then(() => {
-      webgazer.showVideoPreview(true).showPredictionPoints(false).applyKalmanFilter(true);
+      webgazer.showVideoPreview(true).showPredictionPoints(false).applyKalmanFilter(false);
+webgazer.setRegression('ridge');
       runCalibration();
     })
     .catch(err => {
@@ -465,7 +466,7 @@ document.getElementById('btn-cal-done').addEventListener('click', () => {
     const c = document.getElementById('fix-canvas');
     c.width  = window.innerWidth;
     c.height = window.innerHeight;
-  }, 1500);
+  }, 800);
 });
 
 // ── AOI POSITIONING ──
@@ -557,8 +558,8 @@ function startTracking() {
     cacheAOIRects();
     positionAOIOverlays();
     recacheCount++;
-    if (recacheCount >= 20) clearInterval(recacheInterval);
-  }, 200);
+    if (recacheCount >= 5) clearInterval(recacheInterval);
+  }, 500);
 
   timerInterval = setInterval(() => {
     secondsLeft--;
