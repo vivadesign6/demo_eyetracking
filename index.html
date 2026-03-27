@@ -241,9 +241,11 @@
     max-width: 100%;
     max-height: calc(100vh - 160px);
     object-fit: contain;
+    object-position: center;
     display: block;
     position: relative;
     z-index: 1;
+    margin: 0 auto;
 }
   }
   /* AOI overlay container — sits exactly on top of the image */
@@ -732,9 +734,10 @@ function startWebGazer() {
       totalSamples++;
       const { x, y } = data;
       const dot = document.getElementById('gaze-dot');
-      dot.style.left = x + 'px';
-      dot.style.top  = y + 'px';
-      dot.style.display = 'block';
+dot.style.left = x + 'px';
+dot.style.top  = y + 'px';
+// Dot only shown during calibration — hidden during stimulus to avoid
+// influencing participant gaze behaviour (demand characteristics)
       const aoi = hitAOI(x, y);
       rawGaze.push({ ts, x: Math.round(x), y: Math.round(y), aoi });
     })
